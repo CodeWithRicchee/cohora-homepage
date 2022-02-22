@@ -3,7 +3,6 @@ import 'package:cohora_homeui_web/helper/formatter.dart';
 import 'package:cohora_homeui_web/helper/style.dart';
 import 'package:cohora_homeui_web/utils/svgicon.dart';
 import 'package:cohora_homeui_web/viewmodels/posts/post_vm.dart';
-
 import 'package:flutter/material.dart';
 
 class PostsList extends StatelessWidget {

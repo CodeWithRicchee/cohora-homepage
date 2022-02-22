@@ -1,5 +1,6 @@
 import 'package:cohora_homeui_web/helper/style.dart';
 import 'package:cohora_homeui_web/models/influencers.dart';
+import 'package:cohora_homeui_web/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Influencers extends StatelessWidget {
@@ -7,10 +8,11 @@ class Influencers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: 310,
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
-      padding: EdgeInsets.only(top: 13),
+      width: Responsive.isMobile(context) ? size.width : 310,
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(top: 13),
       decoration: BoxDecoration(
           boxShadow: shadows,
           color: lightBlue,

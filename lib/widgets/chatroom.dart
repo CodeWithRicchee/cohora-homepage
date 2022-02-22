@@ -1,6 +1,6 @@
 import 'package:cohora_homeui_web/helper/style.dart';
 import 'package:cohora_homeui_web/models/chatrooms.dart';
-import 'package:cohora_homeui_web/models/hottest_product.dart';
+import 'package:cohora_homeui_web/responsive.dart';
 import 'package:cohora_homeui_web/utils/svgicon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +10,9 @@ class ChatRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: 310,
+      width: Responsive.isMobile(context) ? size.width : 310,
       decoration: BoxDecoration(
           color: lightBlue,
           borderRadius: BorderRadius.circular(15),
@@ -31,7 +32,12 @@ class ChatRoom extends StatelessWidget {
                 const Spacer(),
                 svgPostIcons("assets/icons/ArrowSquareOut.svg"),
                 const SizedBox(width: 20),
-                svgPostIcons("assets/icons/CaretDoubleDown.svg"),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: svgPostIcons("assets/icons/CaretDoubleDown.svg"),
+                ),
               ],
             ),
           ),
@@ -60,7 +66,7 @@ class ChatRoom extends StatelessWidget {
                                 label: Text(
                                   "1",
                                   style: GoogleFonts.openSans(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600)),
                                 )))

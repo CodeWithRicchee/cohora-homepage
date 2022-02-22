@@ -1,4 +1,5 @@
 import 'package:cohora_homeui_web/screens/homescreen.dart';
+import 'package:cohora_homeui_web/screens/homescreen/components/mobile_brands.dart';
 import 'package:cohora_homeui_web/viewmodels/posts/posts_list_vm.dart';
 import 'package:cohora_homeui_web/viewmodels/products/product_list_vm.dart';
 import 'package:cohora_homeui_web/viewmodels/selectedchip.dart';

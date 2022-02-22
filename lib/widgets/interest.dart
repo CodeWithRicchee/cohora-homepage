@@ -1,5 +1,6 @@
 import 'package:cohora_homeui_web/helper/style.dart';
 import 'package:cohora_homeui_web/models/interests.dart';
+import 'package:cohora_homeui_web/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Interests extends StatelessWidget {
@@ -7,13 +8,18 @@ class Interests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: 300,
+      width: Responsive.isMobile(context) ? size.width - 50 : 300,
       decoration: BoxDecoration(
           color: lightBlue,
           borderRadius: BorderRadius.circular(7),
           boxShadow: shadows),
-      margin: EdgeInsets.only(right: 10),
+      margin: EdgeInsets.only(
+        right: 10,
+        left: Responsive.isMobile(context) ? 10 : 0,
+        top: Responsive.isMobile(context) ? 15 : 0,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
