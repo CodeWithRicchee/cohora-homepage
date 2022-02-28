@@ -4,9 +4,11 @@ import 'package:cohora_homeui_web/screens/homescreen/homescreen_panels/navigatio
 import 'package:cohora_homeui_web/screens/homescreen/homescreen_panels/right_panel.dart';
 import 'package:cohora_homeui_web/screens/homescreen/homescreen_panels/side_panel.dart';
 import 'package:cohora_homeui_web/services/products.dart';
+import 'package:cohora_homeui_web/services/profileservices.dart';
 import 'package:cohora_homeui_web/utils/svgicon.dart';
 import 'package:cohora_homeui_web/viewmodels/posts/posts_list_vm.dart';
 import 'package:cohora_homeui_web/viewmodels/products/product_list_vm.dart';
+import 'package:cohora_homeui_web/viewmodels/profile/profile_vm.dart';
 import 'package:cohora_homeui_web/widgets/brandposts.dart';
 import 'package:cohora_homeui_web/widgets/choicechip.dart';
 import 'package:cohora_homeui_web/widgets/header.dart';
@@ -26,10 +28,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    Provider.of<ProfileViewModel>(context, listen: false)
+        .fetchProfileAndFreinds();
     Provider.of<PostsListVM>(context, listen: false).fetchPosts();
     Provider.of<ProductsListVM>(context, listen: false).fetchProducts();
-    ProductApi().fetchProducts();
-    ProductsListVM().fetchProducts();
     super.initState();
   }
 
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final postvm = Provider.of<PostsListVM>(context);
     final productvm = Provider.of<ProductsListVM>(context);
+    final profilevm = Provider.of<ProfileViewModel>(context);
     int index = 2;
     return Scaffold(
         extendBody: true,
@@ -48,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Responsive(
           mobile: Column(
             children: [
-              Header(productsListVM: productvm),
+              Header(productsListVM: productvm, profilevm: profilevm),
               const ChoiceChipSelector(),
               Expanded(
                 child: ListView(
@@ -67,14 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
             child: Column(
               children: [
-                Header(productsListVM: productvm),
+                Header(productsListVM: productvm, profilevm: profilevm),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 7,
-                      child: SidePanel(),
+                      child: SidePanel(profilevm: profilevm),
                     ),
                     Expanded(
                       flex: 9,

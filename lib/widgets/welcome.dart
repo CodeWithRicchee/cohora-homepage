@@ -1,14 +1,16 @@
+import 'package:cohora_homeui_web/helper/formatter.dart';
 import 'package:cohora_homeui_web/helper/style.dart';
 import 'package:cohora_homeui_web/responsive.dart';
 import 'package:cohora_homeui_web/utils/svgicon.dart';
+import 'package:cohora_homeui_web/viewmodels/profile/profile_vm.dart';
 import 'package:cohora_homeui_web/widgets/welcome/welcome_tile_avatar.dart';
 import 'package:cohora_homeui_web/widgets/welcome/welcome_tile_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({Key? key}) : super(key: key);
-
+  const Welcome({Key? key, required this.profile}) : super(key: key);
+  final ProfileViewModel profile;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,13 +18,13 @@ class Welcome extends StatelessWidget {
       alignment: Alignment.topCenter,
       width: Responsive.isMobile(context) ? size.width : 310,
       margin: Responsive.isMobile(context)
-          ? EdgeInsets.symmetric(horizontal: 20, vertical: 5)
+          ? const EdgeInsets.symmetric(horizontal: 20, vertical: 5)
           : const EdgeInsets.only(bottom: 15, right: 3, top: 5),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: shadows),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: Responsive.isMobile(context)
@@ -37,7 +39,7 @@ class Welcome extends StatelessWidget {
                     textStyle: const TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w700,
-                        letterSpacing: -1)),
+                        letterSpacing: 0)),
               ),
               const Spacer(),
               Responsive.isMobile(context)
@@ -62,39 +64,48 @@ class Welcome extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30),
-          Row(
-            children: [
-              CircleAvatar(
-                child: Image.asset("assets/welcome/Background.png"),
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                "Sormy Curpen",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              ),
-            ],
+          GestureDetector(
+            onTap: () {
+              launchURL(profile.profileUrl.toString());
+            },
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: NetworkImage(profile.photoUrl.toString()),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  profile.fullname ?? "Guest",
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.only(left: 17.0),
             child: Column(
-              children: const [
+              children: [
                 WelcomeTileAvatar(
                     icon: "Users",
                     name: "Freinds",
-                    count: "150",
+                    count: profile.count.toString(),
                     avatar: "Photo"),
-                WelcomeTileAvatar(
+                const WelcomeTileAvatar(
                     icon: "UserCircle",
                     name: "Followers",
                     count: "69",
                     avatar: "Photo1"),
                 WelcomeTileChip(
-                    icon: "EnvelopeSimple", name: "Messages", count: "11"),
+                  icon: "EnvelopeSimple",
+                  name: "Messages",
+                  count: profile.unreadMessageCount.toString(),
+                ),
                 WelcomeTileChip(
                     icon: "CurrencyCircleDollar",
                     name: "Loyalty coins",
-                    count: "500"),
+                    count: profile.loyaltyCoins.toString()),
               ],
             ),
           )

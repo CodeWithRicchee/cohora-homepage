@@ -1,5 +1,4 @@
 import 'package:cohora_homeui_web/helper/formatter.dart';
-import 'package:cohora_homeui_web/models/hottest_product.dart';
 import 'package:cohora_homeui_web/responsive.dart';
 import 'package:cohora_homeui_web/viewmodels/products/products_vm.dart';
 import 'package:cohora_homeui_web/widgets/hottest_product/indicator.dart';
@@ -23,6 +22,7 @@ class _HottestProductState extends State<HottestProduct> {
       padding: Responsive.isMobile(context)
           ? const EdgeInsets.symmetric(horizontal: 15)
           : const EdgeInsets.all(3),
+      margin: EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(

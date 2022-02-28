@@ -31,6 +31,7 @@ class Influencers extends StatelessWidget {
           ListView.builder(
             shrinkWrap: true,
             itemCount: influencersList.length,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(

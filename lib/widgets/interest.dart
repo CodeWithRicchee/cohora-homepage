@@ -34,9 +34,10 @@ class Interests extends StatelessWidget {
           ListView.builder(
               shrinkWrap: true,
               itemCount: interestList.length,
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.symmetric(vertical: 7),
+                  margin: const EdgeInsets.symmetric(vertical: 7),
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 18,

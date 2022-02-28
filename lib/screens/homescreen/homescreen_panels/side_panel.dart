@@ -1,3 +1,4 @@
+import 'package:cohora_homeui_web/viewmodels/profile/profile_vm.dart';
 import 'package:cohora_homeui_web/widgets/brandposts.dart';
 import 'package:cohora_homeui_web/widgets/interest.dart';
 import 'package:cohora_homeui_web/widgets/quizes_survey.dart';
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class SidePanel extends StatelessWidget {
   const SidePanel({
-    Key? key,
+    Key? key, required this.profilevm,
   }) : super(key: key);
-
+  final ProfileViewModel profilevm;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,11 +22,11 @@ class SidePanel extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: const [
-              Welcome(),
-              QuizesAndSurvey(),
-              BrandPost(),
-              Interests()
+            children:  [
+              Welcome(profile: profilevm),
+              const QuizesAndSurvey(),
+              const BrandPost(),
+              const Interests()
             ],
           ),
         ],

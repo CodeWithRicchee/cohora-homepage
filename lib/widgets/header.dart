@@ -5,12 +5,14 @@ import 'package:cohora_homeui_web/screens/homescreen/components/mobile_message_l
 import 'package:cohora_homeui_web/screens/homescreen/components/mobile_profile_view.dart';
 import 'package:cohora_homeui_web/utils/svgicon.dart';
 import 'package:cohora_homeui_web/viewmodels/products/product_list_vm.dart';
+import 'package:cohora_homeui_web/viewmodels/profile/profile_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
-  const Header({Key? key, required this.productsListVM}) : super(key: key);
+  const Header({Key? key, required this.productsListVM, required this.profilevm}) : super(key: key);
   final ProductsListVM productsListVM;
+  final ProfileViewModel profilevm;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -117,7 +119,11 @@ class Header extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MobileProfileView()));
+                                  builder: (context) =>
+                                      ListenableProvider<ProfileViewModel>.value(
+                                        value: profilevm,
+                                        child: MobileProfileView(profilevm: profilevm),
+                                      )));
                   }
                 },
                 child: Image.asset("assets/header/Albert.png"))

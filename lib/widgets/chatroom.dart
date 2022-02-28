@@ -44,6 +44,7 @@ class ChatRoom extends StatelessWidget {
           ListView.builder(
             shrinkWrap: true,
             itemCount: chatList.length,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
                 color: chatList[index].specialRoom == "Special"

@@ -1,5 +1,3 @@
-
-
 import 'package:cohora_homeui_web/utils/post_button.dart';
 import 'package:cohora_homeui_web/viewmodels/posts/posts_list_vm.dart';
 import 'package:cohora_homeui_web/widgets/choicechip.dart';
@@ -17,9 +15,10 @@ class CenterPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 7),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
-      height: MediaQuery.of(context).size.height * 0.86,
+      height: MediaQuery.of(context).size.height * 0.85,
       child: Column(
         children: [
           const ChoiceChipSelector(),

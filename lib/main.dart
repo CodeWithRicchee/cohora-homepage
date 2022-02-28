@@ -1,7 +1,8 @@
+import 'package:cohora_homeui_web/helper/customscroll.dart';
 import 'package:cohora_homeui_web/screens/homescreen.dart';
-import 'package:cohora_homeui_web/screens/homescreen/components/mobile_brands.dart';
 import 'package:cohora_homeui_web/viewmodels/posts/posts_list_vm.dart';
 import 'package:cohora_homeui_web/viewmodels/products/product_list_vm.dart';
+import 'package:cohora_homeui_web/viewmodels/profile/profile_vm.dart';
 import 'package:cohora_homeui_web/viewmodels/selectedchip.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
                 .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
           ),
         ),
+        scrollBehavior: MyCustomScrollBehavior(),
         home: MultiProvider(
           providers: [
             ChangeNotifierProvider<SelectedChip>(
@@ -38,6 +40,10 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<ProductsListVM>(
                 create: (BuildContext context) {
               return ProductsListVM();
+            }),
+            ChangeNotifierProvider<ProfileViewModel>(
+                create: (BuildContext context) {
+              return ProfileViewModel();
             }),
           ],
           child: HomeScreen(),
